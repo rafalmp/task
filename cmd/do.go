@@ -9,10 +9,10 @@ import (
 )
 
 func init() {
-	rootCmd.AddCommand(goCmd)
+	rootCmd.AddCommand(doCmd)
 }
 
-var goCmd = &cobra.Command{
+var doCmd = &cobra.Command{
 	Use:   "do [flags] <task no.>",
 	Short: "Mark a task as complete",
 	Args:  cobra.ExactArgs(1),
