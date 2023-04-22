@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"fmt"
-	"os"
 	"strconv"
 
 	"github.com/spf13/cobra"
@@ -13,15 +12,19 @@ func init() {
 }
 
 var doCmd = &cobra.Command{
-	Use:   "do [flags] <task no.>",
+	Use:   "do [flags] <task number(s)>",
 	Short: "Mark a task as complete",
-	Args:  cobra.ExactArgs(1),
+	Args:  cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		taskId, err := strconv.Atoi(args[0])
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
+		var taskIds []int
+		for _, arg := range args {
+			id, err := strconv.Atoi(arg)
+			if err != nil {
+				fmt.Println("Failed to parse arg:", arg)
+			} else {
+				taskIds = append(taskIds, id)
+			}
 		}
-		fmt.Printf("Marking task no. %d as complete\n", taskId)
+		fmt.Printf("Marking task(s) as complete: %v\n", taskIds)
 	},
 }
