@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/spf13/cobra"
 )
@@ -11,9 +12,10 @@ func init() {
 }
 
 var addCmd = &cobra.Command{
-	Use:   "add",
+	Use:   "add [flags] <task description>",
 	Short: "Add a new task to your list",
+	Args:  cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("This is a fake \"add\" command.")
+		fmt.Println("Task: " + strings.Join(args, " "))
 	},
 }
