@@ -27,7 +27,7 @@ var listCmd = &cobra.Command{
 		}
 		fmt.Println("Your task list:")
 		for i, task := range tasks {
-			fmt.Printf("%d. %s", i+1, task.Value)
+			fmt.Printf("%d. %s\n", i+1, task.Value)
 		}
 	},
 }
