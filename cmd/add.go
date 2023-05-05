@@ -20,7 +20,7 @@ var addCmd = &cobra.Command{
 		task := strings.Join(args, " ")
 		_, err := db.CreateTask(task)
 		if err != nil {
-			fmt.Println("An error occurred: ", err.Error())
+			fmt.Println("An error occurred: ", err)
 			return
 		}
 		fmt.Printf("Added \"%s\" to your task list.\n", task)
