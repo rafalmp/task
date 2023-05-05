@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/rafalmp/task/db"
 	"github.com/spf13/cobra"
 )
 
@@ -16,6 +17,12 @@ var addCmd = &cobra.Command{
 	Short: "Add a new task to your list",
 	Args:  cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Task: " + strings.Join(args, " "))
+		task := strings.Join(args, " ")
+		_, err := db.CreateTask(task)
+		if err != nil {
+			fmt.Println("An error occurred: ", err.Error())
+			return
+		}
+		fmt.Printf("Added \"%s\" to your task list.\n", task)
 	},
 }
